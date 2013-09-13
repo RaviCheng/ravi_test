@@ -1,0 +1,90 @@
+<?php
+/**
+ * Created by JetBrains PhpStorm.
+ * User: ravi
+ * Date: 2013/9/10
+ * Time: 上午 10:18
+ * To change this template use File | Settings | File Templates.
+ */
+    require('lib/DB_Config.php');
+    $DB = new DBAccess();
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="jquery/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="ajax/ajax.js"></script>
+</head>
+<body>
+    <table >
+        <tr>
+            <td>
+                <form id="Postform" name="Postform" method="post">
+                    <table cellpadding="0" cellspacing="0" width="100%" border="0" style="line-height:25px;">
+                        <tr>
+                            <td align="right" width="100">
+                                主題：
+                            </td>
+                            <td align="left">
+                                <input type="text" id="txtTheme" name="txtTheme" style="border:1px solid #abadb3;width:300px;" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                姓名：
+                            </td>
+                            <td align="left">
+                                <input type="text" name="txtName" id="txtName" style="border:1px solid #abadb3;width:300px;" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                內容：
+                            </td>
+                            <td align="left">
+                                <textarea name="txtContent" id="txtContent" style="border:1px solid #abadb3;width:450px;height:120px;"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" style="padding:10px 0;" colspan="2" >
+                                <table cellpadding="0" cellspacing="0"  border="0">
+                                    <tr>
+                                        <td style="padding-right: 10px;">
+                                            <input type="button" name="btnSend" id="btnSend" value="確定送出" onClick="javascript:InsertMessage()"/>
+                                        </td>
+                                        <td style="padding-right: 10px;">
+                                            <input type="reset" value="重新填寫" />
+                                        </td>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <?php
+                    $DB->SelectMessage();
+                    while($Message = $DB->fetch_array())
+                    {
+                        echo $Message['Name'] . " : " . $Message['Theme'];
+                        echo "<br>";
+                        echo $Message['Centent'];
+                        echo "<br>";
+                        echo $Message['Nowtime'];
+                        echo ' <span onclick="DeleteMessage(' . $Message['id'] . ');" style="cursor:pointer;">刪除</span>';
+                        echo ' <span onclick="EditMessage(' . $Message['id'] . ');" style="cursor:pointer;">編輯</span>';
+
+                        echo "<br>";
+                        echo "<br>";
+                    } // end while
+                ?>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

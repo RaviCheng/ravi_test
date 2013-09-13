@@ -1,0 +1,56 @@
+<?php
+
+//    require('lib/DB_Config.php');
+//    $DB = new DBAccess();
+//
+//    $messages = array();
+//
+//    $DB->SelectMessage();
+//    while($Message = $DB->fetch_array())
+//    {
+//      // array_push($message,$Message);
+//     // print_r ($Message);
+//        $messages[] = $Message;
+//    }
+//
+//   print_r ($messages);
+
+//    require('lib/guestbook_class.php');
+//
+//    $guest_book = new Guestbook();
+//    print_r($guest_book->get_all_message());
+
+namespace blog\rock {
+    function bar() {
+        echo "BAR\n";
+    }
+
+    class Ccllaass {
+        public static function bar() {
+            echo "cc\n";
+        }
+    }
+}
+
+namespace { // namespace without name means global namespace
+    function bar() {
+        echo "bar\n";
+    }
+
+    use \blog\rock as rock; // 匯入名稱空間並取別名為 rock
+    use \blog\rock\Ccllaass as Cc; // 匯入名稱空間下的類別並取別名為 Cc
+
+    $rock_bar = '\blog\rock\bar'; //動態存取空間內的元素
+
+    $cc = '\blog\rock\Ccllaass';
+
+    $clz = 'Ccllaass';
+    $cc2 = "\\blog\\rock\\$clz"; //注意 \ 的跳脫處理
+
+    bar();
+    rock\bar();
+    $rock_bar();
+    Cc::bar();
+    $cc::bar();
+    $cc2::bar();
+}

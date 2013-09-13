@@ -34,6 +34,7 @@ function __autoload($className)
 
 //$actions = new Actions;
 //$actions->run();
+//
 
 $indexController = new IndexController();
 $indexController->setRouter(new Router());
